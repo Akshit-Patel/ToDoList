@@ -165,7 +165,7 @@ render(){
  }  
  return(
     <React.Fragment>
-    {this.button}
+    <span className="AddButton">{this.button}</span>
     {container}
     <div className="list">
     <ShowData/>
@@ -174,21 +174,44 @@ render(){
  )
 }
 }
+
+// class ShowMoreInfo extends React.component{
+//     constructor(props){
+//         super(props);
+//         this.state = {
+//             isClicked: true
+//         };
+// } 
+
+// }
 class ShowData extends React.Component{
     constructor(props){
         super(props);
 }
 render(){
 //let l = Headings.map((items,index) =>  (items !== "")?(<li key={index}>{items}</li>):({}));
- let finalArray  = Headings.filter((items) => (items !== "" && items !== null));
- let itemList = finalArray.map((items,index) => (<li key={index}>{items}</li>));   
+ let finalArray_Headings  = Headings.filter((items) => (items !== "" && items !== null));
+ let finalArray_Details  = Details.filter((items) => (items !== "" && items !== null));
+ let finalArray_WhenToDo = WhenToDo.filter((items) => (items !== "" && items !== null));
+ let itemList = finalArray_Headings.map((items,index) => (
+
+ <ol>
+ <li key={index}>
+    <div>{items}</div>
+    <ul>
+      <li><div>Details- {finalArray_Details[index]}</div></li>
+      <li><div>Date- {finalArray_WhenToDo[index]}</div></li>
+    </ul>
+ </li>
+ </ol>)
+ );   
 return(
-        <ul>{itemList}</ul>
+        <div>{itemList}</div>
     )
-       
     
 }
 }
+
 ReactDOM.render(
 <ShowButton/>, document.getElementById("root")
 )

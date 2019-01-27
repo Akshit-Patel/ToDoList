@@ -3,6 +3,7 @@ background: #3AAFA9;
 font-family: canada-type-gibson,sans-serif;
 font-weight: 700;
 margin : 0;
+overflow-x: hidden;
 }
 @font-face {
     font-family: "brushgyo personal use";
@@ -23,7 +24,6 @@ margin : 0;
     font-weight: 300;
     justify-content: center;
     align-items:center;
-    
 }
 .container{
  height: 400px;
@@ -37,6 +37,7 @@ margin : 0;
  top:50%;
  left:50%;
  transform: translate(-50%,-50%);
+ z-index: 2;
 
 }
 .container div{
@@ -87,7 +88,7 @@ margin : 0;
     height: 100vh;
     margin:30px auto;
 }
-#root button{
+#root .AddButton button{
     background: #18252a;
     border: none;
     width: 150px;
@@ -106,4 +107,32 @@ margin : 0;
     width:80%;
     margin: 50px 40px;
     color: white;
+
 }
+
+#root .list ol{
+    width: 100%;
+    list-style-type: none;
+    
+}
+#root .list ol li{
+   width: 100%;
+}
+#root .list ol li div{
+  width: 80%;
+  background: white;
+  color: #18252a;
+  font-size: 25px;
+ transform: translateX(-30px);
+}
+#root .list ol ul{
+    list-style-type: none;
+}
+#root .list ol ul li div {
+    width:105%;
+    background: #3AAFA9;
+    font-size: 18px;
+    margin-top: 4px;
+    
+}
+
