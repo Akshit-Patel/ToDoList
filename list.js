@@ -1,6 +1,6 @@
 var Headings = [];
-var Details= [];
-var WhenToDo = [];
+var Details= ["j"];
+var WhenToDo = ["j"];
 class Input extends React.Component{
     constructor(props){
         super(props);
@@ -24,7 +24,7 @@ changeHandle(e){
        }
      return(
      <React.Fragment>
-     <label>{infoType} </label>
+     <label>{infoType}</label>
      <input value={userInput} onChange={this.changeHandle}></input>
      </React.Fragment>
      )
@@ -62,7 +62,6 @@ class PopupForAdd extends React.Component{
         this.inputHandler1 = this.inputHandler1.bind(this);
         this.inputHandler2 = this.inputHandler2.bind(this);
         this.inputHandler3 = this.inputHandler3.bind(this);
-        console.log(this.props.number);
     } 
     inputHandler1(userInput){
         this.setState({Name:userInput});   
@@ -81,9 +80,9 @@ class PopupForAdd extends React.Component{
         let input3 = this.state.WhenToDo;
         return(
               <PopUpDiv>
-              <Input infoType={this.Name} userInput={input1} changeHandler ={this.inputHandler1}/>
-              <Input infoType={this.Details} userInput={input2} changeHandler ={this.inputHandler2}/>
-              <Input infoType={this.WhenToDo} userInput={input3} changeHandler ={this.inputHandler3}/>
+              <Input infoType={this.Name} userInput={input1} changeHandler ={this.inputHandler1} number={this.props.arrayPos}/>
+              <Input infoType={this.Details} userInput={input2} changeHandler ={this.inputHandler2} number={this.props.arrayPos}/>
+              <Input infoType={this.WhenToDo} userInput={input3} changeHandler ={this.inputHandler3} number={this.props.arrayPos}/>
               </PopUpDiv>
     ) }
 }
@@ -97,43 +96,84 @@ class Button extends React.Component{
    }
     render(){
         return(
-            <button onClick={this.clicking}>Add New Item</button>
+            <button onClick={this.clicking}>{this.props.text}</button>
             );
     }
    
 }
+
 class ShowButton extends React.Component{
 constructor(props){
    super(props); 
    this.state = {
-       isClicked:false
+       isClicked:false,
+       count:-1
    }
    this.onClick = this.onClick.bind(this);
-   this.button = <Button click={this.onClick}/>;
+   this.button = <Button click={this.onClick} text="Add Item"/>;
+   this.onClickAdd = this.onClickAdd.bind(this);
+   this.onClickCancel = this.onClickCancel.bind(this);
 }
 onClick(){
-this.setState(state => ({isClicked : !state.isClicked}));
+if(this.state.isClicked == false){
+this.setState(state => ({isClicked : !state.isClicked,count : ++state.count}));
 }
+}
+
+onClickAdd(){
+    if(this.state.isClicked == true){
+        this.setState(state => ({isClicked : !state.isClicked}));
+    }
+}
+onClickCancel(){
+    if(this.state.isClicked == true){
+        this.setState(state => ({isClicked : !state.isClicked,count : --state.count}));
+    }
+    Headings[this.state.count] = null;
+    WhenToDo[this.state.count] = null;
+    Details[this.state.count] = null;
+}
+
 render(){
- 
   let addInfo;
+  let addButton;
+  let cancelButton;
  if(this.state.isClicked){
-     addInfo = <PopupForAdd number={0}/>
+     addInfo = <div className="container"><PopupForAdd arrayPos={this.state.count}/></div>
+     addButton = <Button click={this.onClickAdd} text="OK!"/>;
+     cancelButton = <Button click={this.onClickCancel} text="Cancel"/>;
  }
  else{
      addInfo= null;
+     addButton = null;
+     cancelButton = null;
  }  
  return(
-     
     <React.Fragment>
     {this.button}
-    <div className="container">{addInfo}</div>
+    {addInfo}
+    {addButton}
+    {cancelButton}
+    <ShowData/>
     </React.Fragment>
  )
 }
 }
-
+class ShowData extends React.Component{
+    constructor(props){
+        super(props);
+}
+render(){
+//let l = Headings.map((items,index) =>  (items !== "")?(<li key={index}>{items}</li>):({}));
+ let finalArray  = Headings.filter((items) => (items !== "" && items !== null));
+ let itemList = finalArray.map((items,index) => (<li key={index}>{items}</li>));   
+return(
+        <ul>{itemList}</ul>
+    )
+       
+    
+}
+}
 ReactDOM.render(
-    <ShowButton/>, document.getElementById("AddItemButton")
+<ShowButton/>, document.getElementById("AddItemButton")
 )
-
