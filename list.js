@@ -167,8 +167,10 @@ render(){
     <React.Fragment>
     {this.button}
     {container}
+    <div className="list">
     <ShowData/>
-    </React.Fragment>
+    </div>  
+     </React.Fragment>
  )
 }
 }
@@ -188,5 +190,5 @@ return(
 }
 }
 ReactDOM.render(
-<ShowButton/>, document.getElementById("AddItemButton")
+<ShowButton/>, document.getElementById("root")
 )

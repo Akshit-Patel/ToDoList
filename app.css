@@ -2,6 +2,28 @@ body{
 background: #3AAFA9;
 font-family: canada-type-gibson,sans-serif;
 font-weight: 700;
+margin : 0;
+}
+@font-face {
+    font-family: "brushgyo personal use";
+    src: url('Fonts/brushgyo.otf');
+}
+@font-face {
+    font-family: "Weather_Sunday";
+    src: url('Fonts/Weather_Sunday.otf');
+}
+.header{
+    background: #18252a;
+    display: inline-flex;
+    width:100vw;
+    font-family:'Weather_Sunday';
+    font-size:40px;
+    height:55px;
+    color: white;
+    font-weight: 300;
+    justify-content: center;
+    align-items:center;
+    
 }
 .container{
  height: 400px;
@@ -25,6 +47,7 @@ font-weight: 700;
     margin-bottom: 20px;
     padding-left: 100px;
     height: 200px;
+    font-weight: 600;
 }
 .container div label{
     padding:auto 0;
@@ -44,13 +67,43 @@ font-weight: 700;
     height: 50px;
     /* transform: perspective(1000px) rotateY(-30deg);  */
     font-family: inherit;
-    font-weight: 700;
+    font-weight: 600;
     margin-left: 150px;
     color: aliceblue;
     font-size:20px;
 }
 .container button:hover{
     background: white;
-    color:#18252a;
-    
+    color:#18252a;  
+}
+#root{
+    width:80vw;
+    background-color: white;  
+    padding: 60px 0px;
+    display: flex;
+    align-items: center;
+    height:fit-content;
+    flex-direction: column;
+    height: 100vh;
+    margin:30px auto;
+}
+#root button{
+    background: #18252a;
+    border: none;
+    width: 150px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: 600;
+    margin-left: 150px;
+    color: white;
+    font-size:20px;
+    border-radius: 25px  25px;
+    transform:translateX(-80px);
+}
+#root .list{
+    background: #18252a;
+    margin-top: 50px;
+    width:80%;
+    margin: 50px 40px;
+    color: white;
 }
