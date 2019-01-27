@@ -101,7 +101,18 @@ class Button extends React.Component{
     }
    
 }
-
+class ContainerGen extends React.Component{
+    constructor(props){
+      super(props);
+    }
+    render(){
+        return(
+          <div className="container">
+          {this.props.children}
+          </div>
+        )
+    }
+}
 class ShowButton extends React.Component{
 constructor(props){
    super(props); 
@@ -138,22 +149,24 @@ render(){
   let addInfo;
   let addButton;
   let cancelButton;
+  let container;
  if(this.state.isClicked){
-     addInfo = <div className="container"><PopupForAdd arrayPos={this.state.count}/></div>
+     addInfo = <PopupForAdd arrayPos={this.state.count}/>
      addButton = <Button click={this.onClickAdd} text="OK!"/>;
      cancelButton = <Button click={this.onClickCancel} text="Cancel"/>;
+     container = <ContainerGen>
+        {addInfo}
+        {addButton}
+        {cancelButton}
+     </ContainerGen>
  }
  else{
-     addInfo= null;
-     addButton = null;
-     cancelButton = null;
+     container = null;
  }  
  return(
     <React.Fragment>
     {this.button}
-    {addInfo}
-    {addButton}
-    {cancelButton}
+    {container}
     <ShowData/>
     </React.Fragment>
  )
